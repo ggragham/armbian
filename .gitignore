@@ -15,8 +15,12 @@ ubuntu-*-cloudimg-console.log
 /.tmp/
 /output/
 /cache/
-/*userpatches*/
-/userpatches
+# /*userpatches*/
+# /userpatches
+/userpatches/*
+
+### exclude orangepi configs
+!/userpatches/config-orangepi*.conf
 
 ### General annoyances ###
 .DS_Store
