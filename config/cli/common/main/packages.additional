@@ -5,7 +5,6 @@ automake
 avahi-autoipd
 bash-completion
 bison
-btrfs-progs
 build-essential
 cracklib-runtime
 dkms
@@ -16,7 +15,6 @@ f2fs-tools
 f3
 fbset
 flex
-git
 gpiod
 gnupg2
 haveged
@@ -38,20 +36,13 @@ libpam-systemd
 libproc-processtable-perl
 libssl-dev
 libwrap0-dev
-mc
-network-manager-openvpn
 nfs-common
-ntfs-3g
 pciutils
-plymouth
-plymouth-themes
 pv
 python3-distutils
 python3-lib2to3
-qrencode
 rfkill
 rng-tools
-screen
 software-properties-common
 smartmontools
 stress
@@ -61,4 +52,3 @@ unicode-data
 unzip
 vnstat
 wget
-wireless-regdb

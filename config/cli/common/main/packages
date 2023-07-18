@@ -1,4 +1,3 @@
-alsa-utils
 bc
 bridge-utils
 chrony
@@ -19,7 +18,6 @@ htop
 inetutils-ping
 init
 initramfs-tools
-iw
 jq
 logrotate
 less
@@ -28,9 +26,6 @@ lsof
 man-db
 mmc-utils
 ncurses-term
-nano
-netplan.io
-network-manager
 openssh-server
 parted
 psmisc
@@ -45,5 +40,3 @@ u-boot-tools
 usbutils
 vlan
 wget
-wireless-tools
-wpasupplicant
