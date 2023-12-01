@@ -22,6 +22,8 @@ PACKAGE_LIST_FAMILY="ethtool"
 
 RKBIN_DIR="$SRC/cache/sources/rkbin-tools"
 
+# rockchip64 (used mainly for RK3399) legacy kernel 4.4 is dead code
+
 # Common variables:
 # BOOT_SCENARIO - determines which tpl (ddrbin), spl and ATF combination to use
 #
@@ -59,6 +61,10 @@ elif [[ $BOOT_SOC == rk3328 || $BOOT_SOC == rk3308 ]]; then
 
 	CPUMAX=${CPUMAX:="1296000"}
 
+elif [[ "${BOOT_SOC}" == rk3528 ]]; then
+
+	CPUMAX=${CPUMAX:="2016000"}
+
 elif [[ "${BOOT_SOC}" == rk3566 ]]; then
 
 	CPUMAX=${CPUMAX:="1800000"}
@@ -92,6 +98,12 @@ elif [[ $BOOT_SOC == rk3399pro ]]; then
 	DDR_BLOB="${DDR_BLOB:-"rk33/rk3399pro_npu_ddr_933MHz_v1.02.bin"}"
 	MINILOADER_BLOB="${MINILOADER_BLOB:-"rk33/rk3399pro_miniloader_v1.26.bin"}"
 	BL31_BLOB="${BL31_BLOB:-"rk33/rk3399pro_bl31_v1.35.elf"}"
+
+elif [[ $BOOT_SOC == rk3528 ]]; then
+
+	BOOT_SCENARIO="${BOOT_SCENARIO:=spl-blobs}"
+	DDR_BLOB="${DDR_BLOB:-"rk35/rk3528_ddr_1056MHz_v1.06.bin"}"
+	BL31_BLOB="${BL31_BLOB:-"rk35/rk3528_bl31_v1.16.elf"}"
 
 elif [[ $BOOT_SOC == rk3566 ]]; then
 
@@ -141,8 +153,8 @@ case $BRANCH in
 	edge)
 
 		KERNELPATCHDIR='rockchip64-'$BRANCH
-		declare -g KERNEL_MAJOR_MINOR="6.3" # Major and minor versions of this kernel.
-		KERNELBRANCH="branch:linux-6.3.y"
+		declare -g KERNEL_MAJOR_MINOR="6.6" # Major and minor versions of this kernel.
+		KERNELBRANCH="branch:linux-6.6.y"
 		LINUXFAMILY=rockchip64
 		LINUXCONFIG='linux-rockchip64-'$BRANCH
 
@@ -157,7 +169,7 @@ prepare_boot_configuration() {
 		ATFSOURCE='https://github.com/ARM-software/arm-trusted-firmware'
 		ATF_COMPILER='aarch64-linux-gnu-'
 		ATFDIR='arm-trusted-firmware'
-		ATFBRANCH='tag:v2.6'
+		ATFBRANCH='tag:lts-v2.8.8'
 		ATF_USE_GCC='> 6.3'
 		ATF_TARGET_MAP="M0_CROSS_COMPILE=arm-linux-gnueabi- PLAT=$BOOT_SOC bl31;;build/$BOOT_SOC/release/bl31/bl31.elf:bl31.elf"
 		ATF_TOOLCHAIN2="arm-linux-gnueabi-:< 10.0"
