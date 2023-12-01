@@ -3,6 +3,7 @@ bridge-utils
 chrony
 command-not-found
 console-setup
+cpufrequtils
 cron
 curl
 dbus-user-session
@@ -10,6 +11,7 @@ dialog
 debconf-utils
 debsums
 device-tree-compiler
+dosfstools
 ethtool
 fake-hwclock
 fdisk

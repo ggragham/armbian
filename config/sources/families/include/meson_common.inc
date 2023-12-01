@@ -47,15 +47,15 @@ case $BRANCH in
 	current)
 
 		declare -g KERNEL_MAJOR_MINOR="6.1" # Major and minor versions of this kernel.
-		KERNELBRANCH="branch:linux-6.1.y"
+		KERNELBRANCH="tag:v6.1.63"
 		KERNELPATCHDIR='meson-'$BRANCH
 
 		;;
 
 	edge)
 
-		declare -g KERNEL_MAJOR_MINOR="6.3" # Major and minor versions of this kernel.
-		KERNELBRANCH="branch:linux-6.3.y"
+		declare -g KERNEL_MAJOR_MINOR="6.6" # Major and minor versions of this kernel.
+		KERNELBRANCH="tag:v6.6.2"
 		KERNELPATCHDIR='meson-'$BRANCH
 
 		;;
