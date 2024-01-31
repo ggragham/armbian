@@ -90,13 +90,21 @@ function memoized_git_ref_to_info() {
 			declare url="undetermined"
 			case "${git_source}" in
 
-				"https://git.kernel.org/pub/scm/linux/kernel/"*)
+				"https://git.kernel.org/pub/scm/linux/kernel/"* | "https://git.ti.com/"*)
 					url="${git_source}/plain/Makefile?h=${sha1}"
 					;;
 
 				"https://kernel.googlesource.com/pub/scm/linux/kernel/git/stable/linux-stable" | "https://mirrors.tuna.tsinghua.edu.cn/git/linux-stable.git" | "https://mirrors.bfsu.edu.cn/git/linux-stable.git")
 					# for mainline kernel source, only the origin source support curl
 					url="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=${sha1}"
+					;;
+
+				"https://gitee.com/"*)
+					# parse org/repo from https://gitee.com/org/repo
+					declare org_and_repo=""
+					org_and_repo="$(echo "${git_source}" | cut -d/ -f4-5)"
+					org_and_repo="${org_and_repo%.git}" # remove .git if present
+					url="https://gitee.com/${org_and_repo}/raw/${sha1}/Makefile"
 					;;
 
 				"https://github.com/"*)

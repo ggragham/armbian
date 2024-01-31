@@ -72,6 +72,14 @@ function create_new_rootfs_cache_via_debootstrap() {
 		"'--components=${AGGREGATED_DEBOOTSTRAP_COMPONENTS_COMMA}'" # from aggregation.py
 	)
 
+	# Hacking debootstrap to support future releases as symlink is often the only change, so we don't need to bump host OS
+	# This functionality is coming with debootstrap v1.0.128 (Mantic)
+	local debootstrap_home="/usr/share/debootstrap/scripts"
+	if [[ ! -L "${debootstrap_home}/${RELEASE}" && ! -e "${debootstrap_home}/${RELEASE}" ]]; then
+		display_alert "Making symlink as host deboostrap is missing it" "" "wrn"
+		run_host_command_logged ln -s "${DEBOOTSTRAP_SOURCE}" "${debootstrap_home}/${RELEASE}"
+	fi
+
 	# Small detour for local apt caching option.
 	local_apt_deb_cache_prepare "before debootstrap" # sets LOCAL_APT_CACHE_INFO
 	if [[ "${LOCAL_APT_CACHE_INFO[USE]}" == "yes" ]]; then
@@ -169,6 +177,10 @@ function create_new_rootfs_cache_via_debootstrap() {
 
 	# Now do the install, all packages should have been downloaded by now
 	chroot_sdcard_apt_get_install "${AGGREGATED_PACKAGES_ROOTFS[@]}"
+
+	# Systemd resolver is not working yet
+	run_host_command_logged rm -v "${SDCARD}"/etc/resolv.conf
+	run_host_command_logged echo "nameserver $NAMESERVER" ">" "${SDCARD}"/etc/resolv.conf
 
 	if [[ $BUILD_DESKTOP == "yes" ]]; then
 		# how how many items in AGGREGATED_PACKAGES_DESKTOP array

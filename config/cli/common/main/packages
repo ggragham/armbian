@@ -34,6 +34,7 @@ psmisc
 rsync
 rsyslog
 sudo
+systemd-resolved
 sysfsutils
 sysstat
 toilet

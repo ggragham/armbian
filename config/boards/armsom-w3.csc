@@ -1,4 +1,4 @@
-# Rockchip RK3588 SoC octa core 8-32GB SoC 2.5GBe PoE eMMC USB3 NvME
+# Rockchip RK3588 SoC octa core 8-32GB SoC 2.5GBe eMMC USB3 NvME
 BOARD_NAME="ArmSoM W3"
 BOARDFAMILY="rockchip-rk3588"
 BOARD_MAINTAINER=""
@@ -12,7 +12,6 @@ BOOT_SCENARIO="spl-blobs"
 BOOT_SUPPORT_SPI="yes"
 BOOT_SPI_RKSPI_LOADER="yes"
 IMAGE_PARTITION_TABLE="gpt"
-SKIP_BOOTSPLASH="yes" # Skip boot splash patch, conflicts with CONFIG_VT=yes
 BOOTFS_TYPE="ext4"
 DDR_BLOB='rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.11.bin'
 BL31_BLOB='rk35/rk3588_bl31_v1.38.elf'
